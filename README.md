@@ -61,15 +61,15 @@ GAVAC/
 
 ---
 
-## 🚀 Estado del proyecto
+## Estado del proyecto
 
 Actualmente en desarrollo.
 
-## 👥 Integrantes
+## Integrantes
 
 - Elian Martínez
 
 
-## 📄 Licencia
+## Licencia
 
 Proyecto académico desarrollado como parte del programa de formación SENA.
