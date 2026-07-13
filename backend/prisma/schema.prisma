@@ -8,32 +8,27 @@ datasource db {
 }
 
 model Raza {
-  id                  String   @id @default(uuid())
-  nombre              String   @unique
-  descripcion         String?
-  estado              String   @default("Activo")
-
-  animales            Animal[]
-
-  fechaRegistro       DateTime @default(now())
-  fechaActualizacion  DateTime @updatedAt
+  id                 String   @id @default(uuid())
+  nombre             String   @unique
+  descripcion        String?
+  estado             String   @default("Activo")
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
 }
 
-model Animal {
-  id                  String   @id @default(uuid())
-  chapeta             String   @unique
-  nombre              String?
-  sexo                String
-  fechaNacimiento     DateTime
-  fechaIngreso        DateTime
-  procedencia         String
-  pesoActual          Float
-  estado              String   @default("Activo")
-  observaciones       String?
-
-  razaId              String
-  raza                Raza     @relation(fields: [razaId], references: [id])
-
-  fechaRegistro       DateTime @default(now())
-  fechaActualizacion  DateTime @updatedAt
+model Finca {
+  id                 String   @id @default(uuid())
+  codigo             String   @unique
+  nombre             String
+  propietario        String
+  departamento       String
+  municipio          String
+  vereda             String?
+  direccion          String?
+  telefono           String
+  tamanoHectareas    Float
+  descripcion        String?
+  estado             String   @default("Activa")
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
 }
