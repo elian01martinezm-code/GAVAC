@@ -17,18 +17,72 @@ model Raza {
 }
 
 model Finca {
-  id                 String   @id @default(uuid())
-  codigo             String   @unique
-  nombre             String
-  propietario        String
-  departamento       String
-  municipio          String
-  vereda             String?
-  direccion          String?
-  telefono           String
-  tamanoHectareas    Float
-  descripcion        String?
-  estado             String   @default("Activa")
+  id              String  @id @default(uuid())
+  codigo          String  @unique
+  nombre          String
+  propietario     String
+  departamento    String
+  municipio       String
+  vereda          String?
+  direccion       String?
+  telefono        String
+  tamanoHectareas Float
+  descripcion     String?
+  estado          String  @default("Activa")
+
+  usuariosFinca UsuarioFinca[]
+
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
+}
+
+model Rol {
+  id          String  @id @default(uuid())
+  nombre      String  @unique
+  descripcion String?
+  estado      String  @default("Activo")
+
+  usuariosFinca UsuarioFinca[]
+
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
+}
+
+model Usuario {
+  id        String  @id @default(uuid())
+  nombres   String
+  apellidos String
+  documento String  @unique
+  telefono  String?
+  correo    String? @unique
+  usuario   String  @unique
+  password  String
+
+  estado             String   @default("Activo")
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
+
+  usuariosFinca UsuarioFinca[]
+}
+
+model UsuarioFinca {
+  id String @id @default(uuid())
+
+  usuarioId String
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+
+  fincaId String
+  finca   Finca  @relation(fields: [fincaId], references: [id])
+
+  rolId String
+  rol   Rol    @relation(fields: [rolId], references: [id])
+
+  fechaIngreso DateTime @default(now())
+
+  estado String @default("Activo")
+
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
+
+  @@unique([usuarioId, fincaId])
 }
