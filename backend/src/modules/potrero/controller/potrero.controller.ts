@@ -19,4 +19,21 @@ export class PotreroController {
       });
     }
   }
+
+  async create(req: Request, res: Response) {
+  try {
+    const potrero = await this.potreroService.create(req.body);
+
+    return res.status(201).json({
+      success: true,
+      message: "Potrero creado correctamente",
+      data: potrero,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error al crear el potrero",
+    });
+  }
+}
 }

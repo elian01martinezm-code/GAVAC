@@ -8,4 +8,15 @@ export class PotreroRepository {
       },
     });
   }
+
+  async create(data: {
+    nombre: string;
+    descripcion?: string;
+    area?: number;
+    fincaId: string;
+  }) {
+    return prisma.potrero.create({
+      data,
+    });
+  }
 }
