@@ -31,6 +31,7 @@ model Finca {
   estado          String  @default("Activa")
 
   usuariosFinca UsuarioFinca[]
+  potreros      Potrero[]
 
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
@@ -85,4 +86,19 @@ model UsuarioFinca {
   fechaActualizacion DateTime @updatedAt
 
   @@unique([usuarioId, fincaId])
+}
+
+model Potrero {
+  id                 String   @id @default(uuid())
+  nombre             String
+  descripcion        String?
+  area               Float?
+  estado             String   @default("Activo")
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
+
+  fincaId            String
+  finca              Finca    @relation(fields: [fincaId], references: [id])
+
+  @@index([fincaId])
 }
